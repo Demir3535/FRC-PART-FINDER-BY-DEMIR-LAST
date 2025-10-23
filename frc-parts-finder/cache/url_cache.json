@@ -1,0 +1,86 @@
+{
+  "bb1159c4531538aed76f7406df3d47d0": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761207284.154007,
+    "ttl": 3600
+  },
+  "b3665533e3969172d98399bd487cfb66": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761207284.795769,
+    "ttl": 3600
+  },
+  "fc2e0bd69dfad94de8b25266ce288131": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761207290.001787,
+    "ttl": 3600
+  },
+  "be6ff3be89b5b85f9be1768ecadd2d9d": {
+    "data": {
+      "alive": false
+    },
+    "timestamp": 1761207291.581745,
+    "ttl": 3600
+  },
+  "85f4049876346d270389acf071d62063": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761207323.728107,
+    "ttl": 3600
+  },
+  "236851e6a0027a2dcef8f09b6abed581": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761207325.1551301,
+    "ttl": 3600
+  },
+  "eef17f310ad2663b087f820bb12efeab": {
+    "data": {
+      "alive": false
+    },
+    "timestamp": 1761207504.9038029,
+    "ttl": 3600
+  },
+  "0fcf404002f9ddec3b4c188116472738": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761209216.016683,
+    "ttl": 3600
+  },
+  "9843243788ea96b1a7294e77f5bab1a0": {
+    "data": {
+      "alive": false
+    },
+    "timestamp": 1761209216.62146,
+    "ttl": 3600
+  },
+  "2d82b79daf589d1d2b819d57ed98e498": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761209240.3973079,
+    "ttl": 3600
+  },
+  "f5f57c07429914460708f54871cf703f": {
+    "data": {
+      "alive": true
+    },
+    "timestamp": 1761209751.9887161,
+    "ttl": 3600
+  },
+  "32b12df65197700e7fee49653f96285e": {
+    "data": {
+      "alive": false
+    },
+    "timestamp": 1761209753.972695,
+    "ttl": 3600
+  }
+}

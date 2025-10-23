@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC Parts Finder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1><i class="fas fa-robot"></i> <span data-i18n="title">FRC Parts Finder</span></h1>
+                    <p class="subtitle" data-i18n="subtitle">Search FRC parts, compare prices, discover solutions</p>
+                    <p class="subtitle-enhanced" data-i18n="subtitle-enhanced">✨ Enhanced with real vendor integration (WCP, REV, AndyMark, CTRE)</p>
+                </div>
+                <div class="header-controls">
+                    <div id="languageToggle" class="language-toggle">
+                        <button class="lang-btn active" data-lang="en" onclick="changeLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="tr" onclick="changeLanguage('tr')">TR</button>
+                    </div>
+                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" data-i18n-placeholder="search-placeholder" placeholder="Please include brand + part (e.g., REV NEO, CTRE Kraken X60)" />
+                <button id="searchBtn" type="button" onclick="searchParts(event); return false;">
+                    <i class="fas fa-search"></i> <span data-i18n="search-button">Search</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Searching for parts...</p>
+        </div>
+
+        <div id="resultsContainer">
+            <!-- Part cards will be dynamically added here -->
+        </div>
+
+        <div id="forumSection" style="display: none;">
+            <h2><i class="fas fa-comments"></i> <span data-i18n="forum-title">Chief Delphi - Known Issues & Discussions</span></h2>
+            <div id="forumResults">
+                <!-- Forum links will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Demir Avci 9028. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
