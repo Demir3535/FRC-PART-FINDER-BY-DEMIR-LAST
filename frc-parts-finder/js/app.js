@@ -1004,6 +1004,222 @@ const REAL_PARTS = {
             url: 'https://www.andymark.com/products/mini-cim-motor',
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Mini+CIM'
         }
+    ],
+    'rev spark': [
+        {
+            name: 'SPARK MAX Motor Controller',
+            vendor: 'REV Robotics',
+            price: 100.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-11-2158/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=SPARK+MAX'
+        }
+    ],
+    'limelight 3': [
+        {
+            name: 'Limelight 3 Vision Camera',
+            vendor: 'Limelight',
+            price: 425.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://limelightvision.io/products/limelight-3',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Limelight+3'
+        }
+    ],
+    'limelight 3g': [
+        {
+            name: 'Limelight 3G Vision Camera',
+            vendor: 'Limelight',
+            price: 475.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://limelightvision.io/products/limelight-3g',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Limelight+3G'
+        }
+    ],
+    'photonvision': [
+        {
+            name: 'PhotonVision Compatible Camera',
+            vendor: 'AndyMark',
+            price: 89.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/orange-pi-5-vision-camera',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Vision+Camera'
+        }
+    ],
+    'orange pi': [
+        {
+            name: 'Orange Pi 5 for Vision Processing',
+            vendor: 'AndyMark',
+            price: 99.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/orange-pi-5',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Orange+Pi+5'
+        }
+    ],
+    'raspberry pi': [
+        {
+            name: 'Raspberry Pi 4',
+            vendor: 'AndyMark',
+            price: 55.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/raspberry-pi-4-model-b',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Raspberry+Pi'
+        }
+    ],
+    'chain': [
+        {
+            name: '#25 Roller Chain (10ft)',
+            vendor: 'AndyMark',
+            price: 12.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/25-roller-chain',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Roller+Chain'
+        }
+    ],
+    'sprocket': [
+        {
+            name: '#25 Chain Sprocket',
+            vendor: 'AndyMark',
+            price: 8.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/sprockets',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Sprocket'
+        }
+    ],
+    'bearing': [
+        {
+            name: 'Ball Bearing',
+            vendor: 'AndyMark',
+            price: 3.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/bearings',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Bearing'
+        }
+    ],
+    'hex shaft': [
+        {
+            name: '1/2" Hex Shaft',
+            vendor: 'AndyMark',
+            price: 9.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/1-2-in-hex-shaft',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Hex+Shaft'
+        }
+    ],
+    'thunderhex': [
+        {
+            name: 'ThunderHex Shaft',
+            vendor: 'WCP (West Coast Products)',
+            price: 12.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://wcproducts.com/products/thunderhex',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=ThunderHex'
+        }
+    ],
+    'maxswerve': [
+        {
+            name: 'MAXSwerve Module',
+            vendor: 'REV Robotics',
+            price: 299.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-21-3005/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=MAXSwerve'
+        }
+    ],
+    'greyt': [
+        {
+            name: 'GreyT Telescope Kit',
+            vendor: 'WCP (West Coast Products)',
+            price: 189.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://wcproducts.com/products/greyt-telescope',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=GreyT'
+        }
+    ],
+    'intake roller': [
+        {
+            name: 'Compliant Intake Wheels',
+            vendor: 'AndyMark',
+            price: 24.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/compliant-wheels',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Intake+Wheels'
+        }
+    ],
+    'compliant wheel': [
+        {
+            name: 'Compliant Intake Wheels',
+            vendor: 'AndyMark',
+            price: 24.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/compliant-wheels',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Compliant+Wheels'
+        }
+    ],
+    'vex battery': [
+        {
+            name: 'VEX V5 Robot Battery',
+            vendor: 'AndyMark',
+            price: 49.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/vex-v5-robot-battery',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=VEX+Battery'
+        }
+    ],
+    'led strip': [
+        {
+            name: 'Addressable LED Strip',
+            vendor: 'REV Robotics',
+            price: 19.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-11-1819/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=LED+Strip'
+        }
+    ],
+    'blinkin': [
+        {
+            name: 'REV Blinkin LED Driver',
+            vendor: 'REV Robotics',
+            price: 29.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-11-1105/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Blinkin'
+        }
     ]
 };
 
@@ -1024,35 +1240,49 @@ function generateMockResults(query) {
         }
     }
 
-    // Try starts-with match (query starts with key or key starts with query)
+    // Try starts-with match - but only if key is substantial (>= 3 chars)
     for (const [key, parts] of Object.entries(REAL_PARTS)) {
-        if (queryLower.startsWith(key) || key.startsWith(queryLower)) {
-            return parts;
+        if (key.length >= 3) {
+            if (queryLower.startsWith(key) || key.startsWith(queryLower)) {
+                return parts;
+            }
         }
     }
 
-    // Try word-based matching - ALL query words must match
+    // Try word-based matching - key must be in query as a complete word/token
     for (const [key, parts] of Object.entries(REAL_PARTS)) {
         const queryWords = queryLower.split(/\s+/).filter(w => w.length > 0);
         const keyWords = key.split(/\s+/).filter(w => w.length > 0);
 
-        // Check if all query words match key words
-        const allQueryWordsMatch = queryWords.every(qWord =>
-            keyWords.some(kWord =>
-                kWord.startsWith(qWord) ||
-                qWord.startsWith(kWord) ||
-                kWord.includes(qWord) && qWord.length >= 3
-            )
-        );
+        // If key has multiple words, check if all key words appear in query
+        if (keyWords.length > 1) {
+            const allKeyWordsInQuery = keyWords.every(kWord =>
+                queryWords.some(qWord =>
+                    qWord.includes(kWord) || kWord.includes(qWord)
+                )
+            );
+            if (allKeyWordsInQuery) {
+                return parts;
+            }
+        }
 
-        if (allQueryWordsMatch && queryWords.length > 0) {
-            return parts;
+        // For single-word keys, check if it appears as complete token in query
+        if (keyWords.length === 1 && key.length >= 3) {
+            const keyWord = keyWords[0];
+            const foundInQuery = queryWords.some(qWord =>
+                qWord === keyWord ||
+                qWord.startsWith(keyWord) ||
+                keyWord.startsWith(qWord)
+            );
+            if (foundInQuery) {
+                return parts;
+            }
         }
     }
 
-    // More lenient: check if query contains the full key as substring
+    // More lenient substring search - but key must be substantial
     for (const [key, parts] of Object.entries(REAL_PARTS)) {
-        if (key.length >= 3 && queryLower.includes(key)) {
+        if (key.length >= 4 && queryLower.includes(key)) {
             return parts;
         }
     }
