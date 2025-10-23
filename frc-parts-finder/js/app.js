@@ -1237,7 +1237,6 @@ document.addEventListener('DOMContentLoaded', function() {
         themeIcon.classList.add('fa-sun');
     }
 
-    // Load language
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    changeLanguage(savedLanguage);
+    // Set language to English only
+    changeLanguage('en');
 });
