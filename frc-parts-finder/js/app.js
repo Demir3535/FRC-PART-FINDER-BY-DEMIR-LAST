@@ -431,6 +431,30 @@ const REAL_PARTS = {
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+navX'
         }
     ],
+    'navx2': [
+        {
+            name: 'navX2-MXP Navigation Sensor',
+            vendor: 'AndyMark',
+            price: 115.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/navx2-mxp-robotics-navigation-sensor',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+navX'
+        }
+    ],
+    'navx2-mxp': [
+        {
+            name: 'navX2-MXP Navigation Sensor',
+            vendor: 'AndyMark',
+            price: 115.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/navx2-mxp-robotics-navigation-sensor',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+navX'
+        }
+    ],
     'pigeon': [
         {
             name: 'Pigeon 2.0 IMU',
@@ -672,6 +696,314 @@ const REAL_PARTS = {
             url: 'https://store.ctr-electronics.com/cancoder/',
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CANcoder+Wired'
         }
+    ],
+    'talon fx': [
+        {
+            name: 'Talon FX Motor Controller',
+            vendor: 'CTRE',
+            price: 219.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://store.ctr-electronics.com/talon-fx/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+Talon+FX'
+        }
+    ],
+    'kraken x60': [
+        {
+            name: 'Kraken X60 Brushless Motor',
+            vendor: 'WCP (West Coast Products)',
+            price: 217.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://wcproducts.com/products/kraken-x60',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=WCP+Kraken+X60'
+        },
+        {
+            name: 'Kraken X60 Brushless Motor',
+            vendor: 'CTRE',
+            price: 217.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://store.ctr-electronics.com/kraken-x60/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+Kraken+X60'
+        }
+    ],
+    'pigeon 2': [
+        {
+            name: 'Pigeon 2.0 IMU',
+            vendor: 'CTRE',
+            price: 199.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://store.ctr-electronics.com/pigeon-2/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+Pigeon'
+        },
+        {
+            name: 'Pigeon 2.0 IMU',
+            vendor: 'AndyMark',
+            price: 205.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/pigeon-2-0',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+Pigeon'
+        }
+    ],
+    'rev pneumatic hub': [
+        {
+            name: 'REV Pneumatic Hub',
+            vendor: 'REV Robotics',
+            price: 100.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-11-1852/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=REV+Pneumatic+Hub'
+        }
+    ],
+    'pneumatic hub': [
+        {
+            name: 'REV Pneumatic Hub',
+            vendor: 'REV Robotics',
+            price: 100.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-11-1852/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=REV+Pneumatic+Hub'
+        }
+    ],
+    'radio': [
+        {
+            name: 'OpenMesh OM5P-AN Radio',
+            vendor: 'AndyMark',
+            price: 120.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/open-mesh-om5p-an-radio',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=FRC+Radio'
+        }
+    ],
+    'breaker': [
+        {
+            name: '120A Main Circuit Breaker',
+            vendor: 'AndyMark',
+            price: 15.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/120-amp-main-circuit-breaker',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Circuit+Breaker'
+        }
+    ],
+    'pdp': [
+        {
+            name: 'Power Distribution Panel (PDP)',
+            vendor: 'CTRE',
+            price: 125.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'limited-stock',
+            url: 'https://store.ctr-electronics.com/power-distribution-panel/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+PDP'
+        }
+    ],
+    'vrm': [
+        {
+            name: 'Voltage Regulator Module (VRM)',
+            vendor: 'CTRE',
+            price: 35.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://store.ctr-electronics.com/voltage-regulator-module/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=VRM'
+        }
+    ],
+    'pneumatic cylinder': [
+        {
+            name: 'Double Acting Pneumatic Cylinder',
+            vendor: 'AndyMark',
+            price: 29.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/1-5-bore-pneumatic-cylinder',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Pneumatic+Cylinder'
+        }
+    ],
+    'am14u': [
+        {
+            name: 'am14u 14 inch Drive Wheel',
+            vendor: 'AndyMark',
+            price: 26.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/4-in-performance-wheel',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=am14u+Wheel'
+        }
+    ],
+    'colson': [
+        {
+            name: 'Colson Wheel 4 inch',
+            vendor: 'AndyMark',
+            price: 18.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/4-in-colson-wheel',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Colson+Wheel'
+        }
+    ],
+    'versaplanetary': [
+        {
+            name: 'VersaPlanetary Gearbox',
+            vendor: 'WCP (West Coast Products)',
+            price: 89.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://wcproducts.com/products/versaplanetary',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=VersaPlanetary'
+        }
+    ],
+    'maxplanetary': [
+        {
+            name: 'MAXPlanetary Gearbox',
+            vendor: 'REV Robotics',
+            price: 29.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-21-2100/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=MAXPlanetary'
+        }
+    ],
+    'sds mk4': [
+        {
+            name: 'SDS MK4 Swerve Module',
+            vendor: 'WCP (West Coast Products)',
+            price: 349.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://wcproducts.com/products/mk4-swerve-module',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=SDS+MK4'
+        }
+    ],
+    'sds mk4i': [
+        {
+            name: 'SDS MK4i Swerve Module',
+            vendor: 'WCP (West Coast Products)',
+            price: 369.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://wcproducts.com/products/mk4i-swerve-module',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=SDS+MK4i'
+        }
+    ],
+    'rev color sensor': [
+        {
+            name: 'REV Color Sensor V3',
+            vendor: 'REV Robotics',
+            price: 30.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-31-1557/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Color+Sensor'
+        }
+    ],
+    'color sensor': [
+        {
+            name: 'REV Color Sensor V3',
+            vendor: 'REV Robotics',
+            price: 30.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.revrobotics.com/rev-31-1557/',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Color+Sensor'
+        }
+    ],
+    'limit switch': [
+        {
+            name: 'Limit Switch',
+            vendor: 'AndyMark',
+            price: 5.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/limit-switch',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Limit+Switch'
+        }
+    ],
+    'proximity sensor': [
+        {
+            name: 'Proximity Sensor',
+            vendor: 'AndyMark',
+            price: 12.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/proximity-sensor',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Proximity+Sensor'
+        }
+    ],
+    'photoeye': [
+        {
+            name: 'Photoelectric Sensor (Photo Eye)',
+            vendor: 'AndyMark',
+            price: 24.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'in-stock',
+            url: 'https://www.andymark.com/products/photo-eye',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Photo+Eye'
+        }
+    ],
+    'bag motor': [
+        {
+            name: 'BAG Motor',
+            vendor: 'AndyMark',
+            price: 35.00,
+            originalPrice: null,
+            discount: 0,
+            stock: 'limited-stock',
+            url: 'https://www.andymark.com/products/bag-motor',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=BAG+Motor'
+        }
+    ],
+    '775pro': [
+        {
+            name: '775pro Motor',
+            vendor: 'AndyMark',
+            price: 19.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'limited-stock',
+            url: 'https://www.andymark.com/products/775pro-motor',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=775pro'
+        }
+    ],
+    'mini cim': [
+        {
+            name: 'Mini CIM Motor',
+            vendor: 'AndyMark',
+            price: 39.99,
+            originalPrice: null,
+            discount: 0,
+            stock: 'limited-stock',
+            url: 'https://www.andymark.com/products/mini-cim-motor',
+            image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=Mini+CIM'
+        }
     ]
 };
 
@@ -692,33 +1024,35 @@ function generateMockResults(query) {
         }
     }
 
-    // Try partial match - search in both directions with word boundaries
+    // Try starts-with match (query starts with key or key starts with query)
     for (const [key, parts] of Object.entries(REAL_PARTS)) {
-        // Split query and key into words
-        const queryWords = queryLower.split(/\s+/);
-        const keyWords = key.split(/\s+/);
+        if (queryLower.startsWith(key) || key.startsWith(queryLower)) {
+            return parts;
+        }
+    }
 
-        // Check if all query words are in the key
+    // Try word-based matching - ALL query words must match
+    for (const [key, parts] of Object.entries(REAL_PARTS)) {
+        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 0);
+        const keyWords = key.split(/\s+/).filter(w => w.length > 0);
+
+        // Check if all query words match key words
         const allQueryWordsMatch = queryWords.every(qWord =>
-            keyWords.some(kWord => kWord.includes(qWord) || qWord.includes(kWord))
+            keyWords.some(kWord =>
+                kWord.startsWith(qWord) ||
+                qWord.startsWith(kWord) ||
+                kWord.includes(qWord) && qWord.length >= 3
+            )
         );
 
-        if (allQueryWordsMatch) {
+        if (allQueryWordsMatch && queryWords.length > 0) {
             return parts;
         }
     }
 
-    // If no match found, search for any word match
+    // More lenient: check if query contains the full key as substring
     for (const [key, parts] of Object.entries(REAL_PARTS)) {
-        if (queryLower.includes(key) || key.includes(queryLower)) {
-            return parts;
-        }
-    }
-
-    // Try normalized contains match (ignores punctuation/spaces)
-    for (const [key, parts] of Object.entries(REAL_PARTS)) {
-        const normalizedKey = normalizeQuery(key);
-        if (normalizedKey.length > 2 && (normalizedQuery.includes(normalizedKey) || normalizedKey.includes(normalizedQuery))) {
+        if (key.length >= 3 && queryLower.includes(key)) {
             return parts;
         }
     }
