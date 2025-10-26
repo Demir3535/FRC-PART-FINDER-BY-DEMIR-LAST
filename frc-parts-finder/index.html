@@ -8,7 +8,20 @@
     <link rel="stylesheet" href="css/advanced-features.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="light-mode">
+<body class="light-mode is-loading">
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-track">
+            <img
+                src="images/robot-loader.jpg"
+                data-image-base="images/"
+                data-image-candidates="robot-loader.jpg,robot-loader.jpeg,robot-loader.png,robot_loader.jpg,robot_loader.jpeg,robot-loader.webp"
+                alt="Demir's Swerve Robot"
+                class="loader-robot"
+                onerror="this.classList.add('loader-robot--fallback');">
+        </div>
+        <p class="loading-caption">Swerve warm-up lap...</p>
+    </div>
+
     <div class="container">
         <header>
             <div class="header-content">

@@ -1,5 +1,106 @@
 // FRC Parça Bulucu - Ana JavaScript Dosyası
 
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('loadingOverlay');
+    const body = document.body;
+
+    if (!overlay) {
+        body.classList.remove('is-loading');
+        return;
+    }
+
+    const robot = overlay.querySelector('.loader-robot');
+    let finished = false;
+
+    if (robot) {
+        const basePath = robot.dataset.imageBase || '';
+        const candidateAttr = robot.dataset.imageCandidates || '';
+        const initialSrc = robot.getAttribute('src');
+
+        const candidateUrls = [];
+        const pushCandidate = (value) => {
+            if (!value) return;
+            let cleaned = value.trim();
+            if (!cleaned) return;
+            if (!cleaned.includes('/') && basePath) {
+                cleaned = `${basePath}${cleaned}`;
+            }
+            if (!candidateUrls.includes(cleaned)) {
+                candidateUrls.push(cleaned);
+            }
+        };
+
+        pushCandidate(initialSrc);
+        candidateAttr.split(',').forEach(pushCandidate);
+
+        let attemptIndex = 0;
+        let attempting = false;
+
+        const loadNextCandidate = () => {
+            if (attempting) return;
+            attempting = true;
+
+            const tryIndex = attemptIndex++;
+            if (tryIndex >= candidateUrls.length) {
+                robot.classList.add('loader-robot--fallback');
+                attempting = false;
+                return;
+            }
+
+            const candidate = candidateUrls[tryIndex];
+            const testImg = new Image();
+
+            testImg.onload = () => {
+                robot.src = candidate;
+                robot.classList.remove('loader-robot--fallback');
+                attempting = false;
+            };
+
+            testImg.onerror = () => {
+                attempting = false;
+                loadNextCandidate();
+            };
+
+            testImg.src = candidate;
+        };
+
+        if (!(robot.complete && robot.naturalWidth > 0)) {
+            loadNextCandidate();
+        } else {
+            robot.classList.remove('loader-robot--fallback');
+        }
+
+        robot.addEventListener('error', () => {
+            loadNextCandidate();
+        });
+    }
+
+    const finishIntro = () => {
+        if (finished) return;
+        finished = true;
+
+        overlay.classList.add('loading-overlay-hide');
+        body.classList.remove('is-loading');
+        setTimeout(() => {
+            if (overlay && overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+        }, 650);
+    };
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (robot && !prefersReducedMotion) {
+        robot.addEventListener('animationend', finishIntro, { once: true });
+    }
+
+    if (prefersReducedMotion) {
+        finishIntro();
+    } else {
+        setTimeout(finishIntro, 5000);
+    }
+});
+
 // Global products database
 let PRODUCTS_DATABASE = null;
 let DATABASE_LOADED = false;
