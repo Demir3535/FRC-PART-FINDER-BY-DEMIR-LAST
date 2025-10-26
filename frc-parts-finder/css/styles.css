@@ -488,6 +488,14 @@ header h1 i {
     font-size: 14px;
 }
 
+.results-count-inline {
+    display: inline-block;
+    margin-left: 12px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
 .subtitle-enhanced {
     color: var(--primary);
     font-size: 0.9rem;

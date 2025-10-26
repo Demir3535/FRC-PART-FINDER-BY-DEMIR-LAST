@@ -145,14 +145,17 @@ async function searchParts(event) {
                 const hasRealProducts = fallbackResults.some(part => !part.isSearchLink);
                 const fallbackSource = hasRealProducts ? 'database' : 'fallback';
                 displayResults(fallbackResults, fallbackSource);
-                insertResultsNotice(hasRealProducts
-                    ? `
+                if (hasRealProducts) {
+                    insertResultsNotice(`
                         <strong>Local match:</strong> Verified database results for "${escapeHtml(searchQuery)}".
-                    `
-                    : `
+                        <span class="results-count-inline">${fallbackResults.length} ${translations[currentLanguage]['results-found']}</span>
+                    `);
+                } else {
+                    insertResultsNotice(`
                         <strong>Heads up:</strong> "${escapeHtml(searchQuery)}" is not in the live database. Showing smart vendor search links instead.
-                    `
-                );
+                    `);
+                }
+                searchChiefDelphi(searchQuery, fallbackResults);
                 return;
             }
         }
@@ -160,7 +163,7 @@ async function searchParts(event) {
         displayResults(results, source);
 
         // Search Chief Delphi forum
-        searchChiefDelphi(searchQuery);
+        searchChiefDelphi(searchQuery, results);
 
     } catch (error) {
         console.error('Error searching:', error);
@@ -177,20 +180,20 @@ async function searchParts(event) {
             const isTimeout = error.name === 'AbortError';
             const isNetworkError = error.message.includes('fetch');
 
-            let noticeMessage;
             if (hasRealProducts) {
-                noticeMessage = `
+                insertResultsNotice(`
                     <strong>Local match:</strong> Verified database results for "${escapeHtml(searchQuery)}".
+                    <span class="results-count-inline">${fallbackResults.length} ${translations[currentLanguage]['results-found']}</span>
                     ${isTimeout ? '<br><small>Backend did not respond, so the local database results are shown.</small>' : ''}
-                `;
+                `);
             } else {
-                noticeMessage = `
+                insertResultsNotice(`
                     <strong>Vendor search:</strong> Direct vendor search links for "${escapeHtml(searchQuery)}".
                     ${isTimeout ? '<br><small>Backend timeout — automatically showing alternative results.</small>' : ''}
                     ${isNetworkError ? '<br><small>No backend connection — offline mode active.</small>' : ''}
-                `;
+                `);
             }
-            insertResultsNotice(noticeMessage);
+            searchChiefDelphi(searchQuery, fallbackResults);
         } else {
             // This should rarely happen - show minimal error
             const container = document.getElementById('resultsContainer');
@@ -1395,13 +1398,6 @@ function displayResults(results, source = 'unknown') {
             <div class="results-count">${results.length} ${translations[currentLanguage]['results-found']}</div>
         `;
         container.appendChild(sourceHeader);
-    } else {
-        const resultsCount = document.createElement('div');
-        resultsCount.className = 'results-count';
-        resultsCount.textContent = `${results.length} ${translations[currentLanguage]['results-found']}`;
-        resultsCount.style.margin = '0 auto 12px';
-        resultsCount.style.textAlign = 'center';
-        container.appendChild(resultsCount);
     }
 
     // Find cheapest price among real prices
@@ -1572,69 +1568,354 @@ function createPartCard(part, isCheapest = false) {
 
 const CHIEF_DELPHI_SEARCH_BASE = 'https://www.chiefdelphi.com/search?q=';
 
+const TOPICS_KRAKEN = [
+    {
+        title: 'Kraken X60 • Thermal performance findings',
+        searchTerm: 'Kraken X60 thermal performance',
+        replies: 27,
+        views: 3410,
+        date: 'February 2024'
+    },
+    {
+        title: 'Kraken X60 • Swapping from Falcons experiences',
+        searchTerm: 'Kraken X60 replace falcon lessons',
+        replies: 52,
+        views: 5890,
+        date: 'January 2024'
+    }
+];
+
+const TOPICS_NEO = [
+    {
+        title: 'NEO • Encoder dropout investigations',
+        searchTerm: 'neo motor encoder dropout',
+        replies: 44,
+        views: 5210,
+        date: 'December 2023'
+    },
+    {
+        title: 'NEO • Cooling strategies',
+        searchTerm: 'neo motor cooling match',
+        replies: 29,
+        views: 3475,
+        date: 'November 2023'
+    }
+];
+
+const TOPICS_FALCON = [
+    {
+        title: 'Falcon 500 • Shaft slippage fixes',
+        searchTerm: 'falcon 500 shaft slip fix',
+        replies: 38,
+        views: 6120,
+        date: 'October 2023'
+    },
+    {
+        title: 'Falcon 500 • Firmware brownout lessons',
+        searchTerm: 'falcon 500 firmware brownout frc',
+        replies: 24,
+        views: 4030,
+        date: 'May 2024'
+    }
+];
+
+const TOPICS_SPARK_MAX = [
+    {
+        title: 'SPARK MAX • Firmware update watchlist',
+        searchTerm: 'spark max firmware 2024 issues',
+        replies: 31,
+        views: 4470,
+        date: 'February 2024'
+    },
+    {
+        title: 'SPARK MAX • Sensor port wiring guard',
+        searchTerm: 'spark max sensor port wiring guard frc',
+        replies: 19,
+        views: 2985,
+        date: 'September 2023'
+    }
+];
+
+const TOPICS_TALON = [
+    {
+        title: 'Talon SRX • Motion profiling tuning',
+        searchTerm: 'talon srx motion magic tuning',
+        replies: 45,
+        views: 5320,
+        date: 'March 2024'
+    },
+    {
+        title: 'Talon SRX • CAN bus fault checklist',
+        searchTerm: 'talon srx can fault checklist frc',
+        replies: 27,
+        views: 3580,
+        date: 'August 2023'
+    }
+];
+
+const TOPICS_ENCODER = [
+    {
+        title: 'Encoder • Connection issues field checklist',
+        searchTerm: 'encoder connection issues checklist FRC',
+        replies: 33,
+        views: 4025,
+        date: 'November 2023'
+    },
+    {
+        title: 'CANcoder • Dropouts root causes & fixes',
+        searchTerm: 'CANcoder dropout root cause fix',
+        replies: 41,
+        views: 4780,
+        date: 'December 2023'
+    }
+];
+
+const TOPICS_ROBORIO = [
+    {
+        title: 'roboRIO • Brownout troubleshooting',
+        searchTerm: 'roborio brownout troubleshooting',
+        replies: 29,
+        views: 3560,
+        date: 'March 2024'
+    },
+    {
+        title: 'roboRIO • Ethernet latency discussions',
+        searchTerm: 'roborio ethernet latency',
+        replies: 18,
+        views: 2980,
+        date: 'January 2024'
+    }
+];
+
+const TOPICS_NAVX = [
+    {
+        title: 'navX2 • Calibration workflow tips',
+        searchTerm: 'navx2 calibration workflow frc',
+        replies: 22,
+        views: 2840,
+        date: 'April 2024'
+    },
+    {
+        title: 'navX • Magnetic interference warnings',
+        searchTerm: 'navx magnetic interference frc',
+        replies: 34,
+        views: 3650,
+        date: 'December 2023'
+    }
+];
+
+const TOPICS_GYRO = [
+    {
+        title: 'IMU • Drift mitigation checklist',
+        searchTerm: 'FRC IMU gyro drift mitigation checklist',
+        replies: 28,
+        views: 3190,
+        date: 'January 2024'
+    },
+    {
+        title: 'Field oriented drive • Heading reset strategies',
+        searchTerm: 'field oriented drive heading reset navx pigeon',
+        replies: 37,
+        views: 3890,
+        date: 'June 2023'
+    }
+];
+
+const TOPICS_SWERVE = [
+    {
+        title: 'Swerve • Pre-match inspection checklist',
+        searchTerm: 'swerve module pre match inspection checklist',
+        replies: 43,
+        views: 5215,
+        date: 'February 2024'
+    },
+    {
+        title: 'MK4i • Bevel gear wear tracking',
+        searchTerm: 'mk4i bevel gear wear tracking',
+        replies: 26,
+        views: 3720,
+        date: 'October 2023'
+    }
+];
+
+const TOPICS_PDH = [
+    {
+        title: 'REV PDH • High current logging best practices',
+        searchTerm: 'rev pdh high current logging best practices',
+        replies: 21,
+        views: 2870,
+        date: 'March 2024'
+    },
+    {
+        title: 'Power distribution • Lug torque guidance',
+        searchTerm: 'FRC power distribution lug torque guidance',
+        replies: 17,
+        views: 2450,
+        date: 'July 2023'
+    }
+];
+
+const TOPICS_LIMELIGHT = [
+    {
+        title: 'Limelight • Pipeline tuning for bright fields',
+        searchTerm: 'limelight pipeline tuning bright field',
+        replies: 40,
+        views: 4785,
+        date: 'March 2024'
+    },
+    {
+        title: 'Vision • Reducing camera latency',
+        searchTerm: 'FRC vision camera latency measurement',
+        replies: 25,
+        views: 3320,
+        date: 'January 2024'
+    }
+];
+
 const FORUM_DISCUSSIONS = {
-    'kraken': [
+    'kraken': TOPICS_KRAKEN,
+    'kraken x60': TOPICS_KRAKEN,
+    'neo': TOPICS_NEO,
+    'falcon': TOPICS_FALCON,
+    'falcon 500': TOPICS_FALCON,
+    'spark': TOPICS_SPARK_MAX,
+    'spark max': TOPICS_SPARK_MAX,
+    'sparkmax': TOPICS_SPARK_MAX,
+    'talon': TOPICS_TALON,
+    'talon srx': TOPICS_TALON,
+    'victor spx': TOPICS_TALON,
+    'encoder': TOPICS_ENCODER,
+    'cancoder': TOPICS_ENCODER,
+    'roborio': TOPICS_ROBORIO,
+    'rio': TOPICS_ROBORIO,
+    'navx': TOPICS_NAVX,
+    'navx2': TOPICS_NAVX,
+    'imu': TOPICS_GYRO,
+    'gyro': TOPICS_GYRO,
+    'pigeon': TOPICS_GYRO,
+    'swerve': TOPICS_SWERVE,
+    'mk4': TOPICS_SWERVE,
+    'mk4i': TOPICS_SWERVE,
+    'maxswerve': TOPICS_SWERVE,
+    'swerve module': TOPICS_SWERVE,
+    'pdh': TOPICS_PDH,
+    'pdp': TOPICS_PDH,
+    'power distribution': TOPICS_PDH,
+    'limelight': TOPICS_LIMELIGHT,
+    'vision': TOPICS_LIMELIGHT
+};
+
+const FORUM_CATEGORY_TOPICS = {
+    motors: [
         {
-            title: 'Kraken X60 • Thermal performance findings',
-            searchTerm: 'Kraken X60 thermal performance',
-            replies: 27,
-            views: 3410,
+            title: 'Brushless motors • Thermal throttling management',
+            searchTerm: 'FRC brushless motor thermal throttling management',
+            replies: 36,
+            views: 4180,
+            date: 'April 2024'
+        },
+        {
+            title: 'Motors • Pinion alignment without a press',
+            searchTerm: 'FRC motor pinion alignment without press',
+            replies: 23,
+            views: 2740,
+            date: 'September 2023'
+        }
+    ],
+    'motor controllers': [
+        {
+            title: 'Motor controllers • Current limiting strategies',
+            searchTerm: 'FRC motor controller current limiting strategies',
+            replies: 41,
+            views: 3950,
             date: 'February 2024'
         },
         {
-            title: 'Kraken X60 • Swapping from Falcons experiences',
-            searchTerm: 'Kraken X60 replace falcon lessons',
-            replies: 52,
-            views: 5890,
-            date: 'January 2024'
+            title: 'CAN wiring • Daisy-chain resilience tips',
+            searchTerm: 'FRC CAN wiring daisy chain resilience tips',
+            replies: 32,
+            views: 3120,
+            date: 'August 2023'
         }
     ],
-    'encoder': [
+    sensors: [
         {
-            title: 'Encoder • Connection issues field checklist',
-            searchTerm: 'encoder connection issues checklist FRC',
-            replies: 33,
-            views: 4025,
-            date: 'November 2023'
+            title: 'Sensors • Shock isolation mounting guide',
+            searchTerm: 'FRC sensor shock isolation mounting guide',
+            replies: 18,
+            views: 2290,
+            date: 'June 2024'
         },
         {
-            title: 'CANcoder • Dropouts root causes & fixes',
-            searchTerm: 'CANcoder dropout root cause fix',
-            replies: 41,
-            views: 4780,
-            date: 'December 2023'
+            title: 'I2C buses • Troubleshooting intermittent devices',
+            searchTerm: 'FRC i2c bus troubleshooting intermittent device',
+            replies: 27,
+            views: 2560,
+            date: 'November 2023'
         }
     ],
-    'roborio': [
+    drivetrain: [
         {
-            title: 'roboRIO • Brownout troubleshooting',
-            searchTerm: 'roborio brownout troubleshooting',
-            replies: 29,
-            views: 3560,
+            title: 'Drivetrain • Chain vs belt longevity notes',
+            searchTerm: 'FRC drivetrain chain belt longevity notes',
+            replies: 35,
+            views: 3895,
+            date: 'January 2024'
+        },
+        {
+            title: 'Swerve drive • Practice routine checklist',
+            searchTerm: 'FRC swerve drive practice routine checklist',
+            replies: 30,
+            views: 3620,
+            date: 'May 2024'
+        }
+    ],
+    pneumatics: [
+        {
+            title: 'Pneumatics • Leak hunting checklist',
+            searchTerm: 'FRC pneumatics leak hunting checklist',
+            replies: 22,
+            views: 2440,
             date: 'March 2024'
         },
         {
-            title: 'roboRIO • Ethernet latency discussions',
-            searchTerm: 'roborio ethernet latency',
-            replies: 18,
-            views: 2980,
-            date: 'January 2024'
+            title: 'Air systems • Compressor wiring safety tips',
+            searchTerm: 'FRC compressor wiring safety tips',
+            replies: 17,
+            views: 2130,
+            date: 'July 2023'
         }
     ],
-    'neo': [
+    vision: [
         {
-            title: 'NEO • Encoder dropout investigations',
-            searchTerm: 'neo motor encoder dropout',
-            replies: 44,
-            views: 5210,
-            date: 'December 2023'
+            title: 'Vision • LED lighting control options',
+            searchTerm: 'FRC vision led lighting control options',
+            replies: 28,
+            views: 3010,
+            date: 'October 2023'
         },
         {
-            title: 'NEO • Cooling strategies',
-            searchTerm: 'neo motor cooling match',
-            replies: 29,
-            views: 3475,
-            date: 'November 2023'
+            title: 'Vision • Camera target acquisition drills',
+            searchTerm: 'FRC camera target acquisition drills',
+            replies: 19,
+            views: 2185,
+            date: 'April 2024'
+        }
+    ],
+    power: [
+        {
+            title: 'Batteries • Capacity testing routines',
+            searchTerm: 'FRC battery capacity testing routines',
+            replies: 39,
+            views: 4080,
+            date: 'February 2024'
+        },
+        {
+            title: 'Main breaker • Failure symptom roundup',
+            searchTerm: 'FRC main breaker failure symptoms roundup',
+            replies: 21,
+            views: 2675,
+            date: 'September 2023'
         }
     ]
 };
@@ -1648,12 +1929,12 @@ const GENERIC_FORUM_TOPICS = [
 ];
 
 // Chief Delphi forum araması
-async function searchChiefDelphi(query) {
+async function searchChiefDelphi(query, contextResults = []) {
     const forumSection = document.getElementById('forumSection');
     const forumResults = document.getElementById('forumResults');
 
     // Chief Delphi örnek sonuçları (Gerçek uygulamada API kullanılacak)
-    const mockForumPosts = generateMockForumPosts(query);
+    const mockForumPosts = generateMockForumPosts(query, contextResults);
 
     if (mockForumPosts.length > 0) {
         forumSection.style.display = 'block';
@@ -1678,13 +1959,94 @@ async function searchChiefDelphi(query) {
     }
 }
 
-// Generate mock forum posts
-function generateMockForumPosts(query) {
-    const queryLower = query.toLowerCase().trim();
+function normalizeForumKeyword(value) {
+    if (!value) return '';
+    return value.toString().toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
 
-    const curated = Object.entries(FORUM_DISCUSSIONS).find(([keyword]) =>
-        queryLower.includes(keyword)
-    );
+function addKeywordCandidate(set, value) {
+    const normalized = normalizeForumKeyword(value);
+    if (!normalized) return;
+
+    set.add(normalized);
+
+    const parts = normalized.split(' ').filter(Boolean);
+    parts.forEach(part => {
+        set.add(part);
+        const lettersOnly = part.replace(/\d+/g, '');
+        if (lettersOnly && lettersOnly !== part) {
+            set.add(lettersOnly);
+        }
+    });
+}
+
+// Generate mock forum posts
+function generateMockForumPosts(query, contextResults = []) {
+    const keywords = new Set();
+    const categories = new Set();
+
+    addKeywordCandidate(keywords, query);
+
+    const resultsToProcess = Array.isArray(contextResults) && contextResults.length > 0
+        ? contextResults
+        : (Array.isArray(window.lastSearchResults) ? window.lastSearchResults : []);
+
+    resultsToProcess.forEach(part => {
+        addKeywordCandidate(keywords, part?.name);
+        addKeywordCandidate(keywords, part?.vendor);
+
+        if (Array.isArray(part?.tags)) {
+            part.tags.forEach(tag => addKeywordCandidate(keywords, tag));
+        }
+
+        if (part?.category) {
+            const normalizedCategory = normalizeForumKeyword(part.category);
+            if (normalizedCategory) {
+                categories.add(normalizedCategory);
+            }
+        }
+    });
+
+    // Heuristic category inference if metadata missing
+    if (categories.size === 0) {
+        if (['motor', 'motors', 'brushless', 'kraken', 'neo', 'falcon'].some(k => keywords.has(k))) {
+            categories.add('motors');
+        }
+        if (['controller', 'spark', 'talon', 'victor'].some(k => keywords.has(k))) {
+            categories.add('motor controllers');
+        }
+        if (['sensor', 'imu', 'navx', 'gyro', 'encoder', 'limelight'].some(k => keywords.has(k))) {
+            categories.add('sensors');
+        }
+        if (['swerve', 'drivetrain', 'module', 'mk4', 'drive'].some(k => keywords.has(k))) {
+            categories.add('drivetrain');
+        }
+        if (['pneumatic', 'compressor', 'solenoid', 'air'].some(k => keywords.has(k))) {
+            categories.add('pneumatics');
+        }
+        if (['vision', 'camera', 'limelight'].some(k => keywords.has(k))) {
+            categories.add('vision');
+        }
+        if (['battery', 'pdh', 'pdp', 'power', 'breaker'].some(k => keywords.has(k))) {
+            categories.add('power');
+        }
+    }
+
+    const matchedTopics = [];
+
+    keywords.forEach(keyword => {
+        const normalized = normalizeForumKeyword(keyword);
+        if (normalized && FORUM_DISCUSSIONS[normalized]) {
+            matchedTopics.push(...FORUM_DISCUSSIONS[normalized]);
+        }
+    });
+
+    categories.forEach(category => {
+        const normalizedCategory = normalizeForumKeyword(category);
+        if (normalizedCategory && FORUM_CATEGORY_TOPICS[normalizedCategory]) {
+            matchedTopics.push(...FORUM_CATEGORY_TOPICS[normalizedCategory]);
+        }
+    });
 
     const createPost = (topic) => {
         const replies = topic.replies || Math.floor(Math.random() * 40) + 10;
@@ -1697,29 +2059,42 @@ function generateMockForumPosts(query) {
             url: `${CHIEF_DELPHI_SEARCH_BASE}${encodeURIComponent(searchTerm)}`,
             replies,
             views,
-            date
+            date,
+            searchTerm
         };
     };
 
-    if (curated) {
-        const [, topics] = curated;
-        return topics.map(createPost);
-    }
-
     const posts = [];
-    const numPosts = 3;
+    const seenTerms = new Set();
 
-    for (let i = 0; i < numPosts && i < GENERIC_FORUM_TOPICS.length; i++) {
-        const topic = GENERIC_FORUM_TOPICS[i];
-        posts.push(
-            createPost({
-                title: `${query} • ${topic.title}`,
-                searchTerm: `${query} ${topic.searchTerm}`
-            })
-        );
+    const pushTopic = (topic) => {
+        const post = createPost(topic);
+        if (!seenTerms.has(post.searchTerm)) {
+            posts.push(post);
+            seenTerms.add(post.searchTerm);
+        }
+    };
+
+    matchedTopics.forEach(pushTopic);
+
+    let genericIndex = 0;
+    while (posts.length < 3 && genericIndex < GENERIC_FORUM_TOPICS.length) {
+        const base = GENERIC_FORUM_TOPICS[genericIndex++];
+        pushTopic({
+            title: `${query} • ${base.title}`,
+            searchTerm: `${query} ${base.searchTerm}`
+        });
     }
 
-    return posts;
+    // final fallback if still missing topics
+    while (posts.length < 3) {
+        pushTopic({
+            title: `${query} • Community discussion`,
+            searchTerm: `${query} frc discussion`
+        });
+    }
+
+    return posts.slice(0, 3).map(({ searchTerm, ...rest }) => rest);
 }
 
 // Generate random date
