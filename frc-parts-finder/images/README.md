@@ -1,3 +1,3 @@
 # Image Assets
 
-Place the intro animation image at `robot-loader.jpg` in this directory. It should be the photo of Demir's swerve robot used for the loading animation.
+Place the intro animation image as `robot-loader.jpeg` (preferred) – the loader expects that filename. A fallback placeholder appears if the file is missing.

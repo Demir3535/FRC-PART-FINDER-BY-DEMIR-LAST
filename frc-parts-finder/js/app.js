@@ -13,66 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let finished = false;
 
     if (robot) {
-        const basePath = robot.dataset.imageBase || '';
-        const candidateAttr = robot.dataset.imageCandidates || '';
-        const initialSrc = robot.getAttribute('src');
-
-        const candidateUrls = [];
-        const pushCandidate = (value) => {
-            if (!value) return;
-            let cleaned = value.trim();
-            if (!cleaned) return;
-            if (!cleaned.includes('/') && basePath) {
-                cleaned = `${basePath}${cleaned}`;
-            }
-            if (!candidateUrls.includes(cleaned)) {
-                candidateUrls.push(cleaned);
-            }
-        };
-
-        pushCandidate(initialSrc);
-        candidateAttr.split(',').forEach(pushCandidate);
-
-        let attemptIndex = 0;
-        let attempting = false;
-
-        const loadNextCandidate = () => {
-            if (attempting) return;
-            attempting = true;
-
-            const tryIndex = attemptIndex++;
-            if (tryIndex >= candidateUrls.length) {
-                robot.classList.add('loader-robot--fallback');
-                attempting = false;
-                return;
-            }
-
-            const candidate = candidateUrls[tryIndex];
-            const testImg = new Image();
-
-            testImg.onload = () => {
-                robot.src = candidate;
-                robot.classList.remove('loader-robot--fallback');
-                attempting = false;
-            };
-
-            testImg.onerror = () => {
-                attempting = false;
-                loadNextCandidate();
-            };
-
-            testImg.src = candidate;
-        };
-
-        if (!(robot.complete && robot.naturalWidth > 0)) {
-            loadNextCandidate();
-        } else {
+        if (robot.complete && robot.naturalWidth > 0) {
             robot.classList.remove('loader-robot--fallback');
-        }
+        } else {
+            robot.addEventListener('load', () => {
+                robot.classList.remove('loader-robot--fallback');
+            }, { once: true });
 
-        robot.addEventListener('error', () => {
-            loadNextCandidate();
-        });
+            robot.addEventListener('error', () => {
+                robot.classList.add('loader-robot--fallback');
+            }, { once: true });
+        }
     }
 
     const finishIntro = () => {
