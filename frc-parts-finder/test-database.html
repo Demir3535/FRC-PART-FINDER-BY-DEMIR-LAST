@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Products Database</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .product-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-left: 4px solid #2563eb;
+            border-radius: 4px;
+        }
+        .product-item h3 {
+            margin: 0 0 5px 0;
+            color: #2563eb;
+        }
+        .product-item p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .vendor {
+            color: #666;
+            font-weight: bold;
+        }
+        .price {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .link {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+        }
+        .stat-box p {
+            margin: 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 FRC Products Database Test</h1>
+
+    <div id="loading" class="status info">Loading database...</div>
+
+    <div class="stats" id="stats" style="display: none;"></div>
+
+    <div class="test-section">
+        <h2>Quick Search Test</h2>
+        <input type="text" id="searchInput" placeholder="Search for products (e.g., neo, kraken, spark max)"
+               style="width: 70%; padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px;">
+        <button onclick="testSearch()">Search</button>
+        <button onclick="testRandomSearch()">Random Search</button>
+    </div>
+
+    <div id="searchResults"></div>
+
+    <div class="test-section">
+        <h2>All Product Links Test</h2>
+        <button onclick="testAllLinks()">Test All Product Links</button>
+        <button onclick="showAllProducts()">Show All Products</button>
+        <div id="linkTestResults"></div>
+    </div>
+
+    <div id="allProducts"></div>
+
+    <script>
+        let database = null;
+
+        // Load database
+        async function loadDatabase() {
+            try {
+                const response = await fetch('./data/products-database.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load database');
+                }
+                database = await response.json();
+
+                document.getElementById('loading').className = 'status success';
+                document.getElementById('loading').innerHTML = '✅ Database loaded successfully!';
+
+                showStats();
+                return true;
+            } catch (error) {
+                document.getElementById('loading').className = 'status error';
+                document.getElementById('loading').innerHTML = '❌ Error loading database: ' + error.message;
+                return false;
+            }
+        }
+
+        // Show statistics
+        function showStats() {
+            const stats = document.getElementById('stats');
+            const productCount = Object.keys(database.products).length;
+
+            let totalProducts = 0;
+            let uniqueVendors = new Set();
+            let categories = new Set();
+
+            for (const products of Object.values(database.products)) {
+                totalProducts += products.length;
+                products.forEach(p => {
+                    uniqueVendors.add(p.vendor);
+                    if (p.category) categories.add(p.category);
+                });
+            }
+
+            stats.style.display = 'grid';
+            stats.innerHTML = `
+                <div class="stat-box">
+                    <h3>${productCount}</h3>
+                    <p>Product Types</p>
+                </div>
+                <div class="stat-box">
+                    <h3>${totalProducts}</h3>
+                    <p>Total Products</p>
+                </div>
+                <div class="stat-box">
+                    <h3>${uniqueVendors.size}</h3>
+                    <p>Vendors</p>
+                </div>
+                <div class="stat-box">
+                    <h3>${categories.size}</h3>
+                    <p>Categories</p>
+                </div>
+            `;
+        }
+
+        // Test search
+        function testSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (!query) {
+                alert('Please enter a search query');
+                return;
+            }
+
+            const results = database.products[query];
+            const resultsDiv = document.getElementById('searchResults');
+
+            if (results) {
+                resultsDiv.innerHTML = `
+                    <div class="test-section">
+                        <h2>Search Results for "${query}" (${results.length} found)</h2>
+                        ${results.map(p => `
+                            <div class="product-item">
+                                <h3>${p.name}</h3>
+                                <p><span class="vendor">Vendor:</span> ${p.vendor}</p>
+                                <p><span class="price">Price:</span> $${p.price.toFixed(2)}</p>
+                                <p><strong>Stock:</strong> ${p.stock}</p>
+                                <p><strong>Category:</strong> ${p.category || 'N/A'}</p>
+                                <p><a href="${p.url}" target="_blank" class="link">🔗 View Product</a></p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                resultsDiv.innerHTML = `
+                    <div class="status error">
+                        No results found for "${query}"
+                    </div>
+                `;
+            }
+        }
+
+        // Random search test
+        function testRandomSearch() {
+            const keys = Object.keys(database.products);
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            document.getElementById('searchInput').value = randomKey;
+            testSearch();
+        }
+
+        // Test all links
+        async function testAllLinks() {
+            const resultsDiv = document.getElementById('linkTestResults');
+            resultsDiv.innerHTML = '<div class="status info">Testing all product links... This may take a moment.</div>';
+
+            let totalLinks = 0;
+            let testedLinks = new Set();
+            let results = [];
+
+            for (const [key, products] of Object.entries(database.products)) {
+                for (const product of products) {
+                    if (!testedLinks.has(product.url)) {
+                        testedLinks.add(product.url);
+                        totalLinks++;
+                        results.push({
+                            name: product.name,
+                            vendor: product.vendor,
+                            url: product.url,
+                            valid: product.url.startsWith('http')
+                        });
+                    }
+                }
+            }
+
+            const validLinks = results.filter(r => r.valid).length;
+            const invalidLinks = results.filter(r => !r.valid);
+
+            resultsDiv.innerHTML = `
+                <div class="status success">
+                    ✅ Link Test Complete:<br>
+                    Total Unique Links: ${totalLinks}<br>
+                    Valid Links: ${validLinks}<br>
+                    Invalid Links: ${invalidLinks.length}
+                </div>
+                ${invalidLinks.length > 0 ? `
+                    <div class="status error">
+                        <strong>Invalid Links Found:</strong>
+                        ${invalidLinks.map(l => `<br>• ${l.name} (${l.vendor}): ${l.url}`).join('')}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        // Show all products
+        function showAllProducts() {
+            const allProductsDiv = document.getElementById('allProducts');
+            let html = '<div class="test-section"><h2>All Products in Database</h2>';
+
+            for (const [key, products] of Object.entries(database.products)) {
+                html += `<h3 style="color: #2563eb; margin-top: 20px;">🔑 "${key}" (${products.length} products)</h3>`;
+                products.forEach(p => {
+                    html += `
+                        <div class="product-item">
+                            <h3>${p.name}</h3>
+                            <p><span class="vendor">Vendor:</span> ${p.vendor}</p>
+                            <p><span class="price">Price:</span> $${p.price.toFixed(2)}</p>
+                            <p><strong>Stock:</strong> ${p.stock}</p>
+                            <p><strong>Category:</strong> ${p.category || 'N/A'}</p>
+                            <p><strong>Tags:</strong> ${p.tags ? p.tags.join(', ') : 'N/A'}</p>
+                            <p><a href="${p.url}" target="_blank" class="link">🔗 View Product</a></p>
+                        </div>
+                    `;
+                });
+            }
+
+            html += '</div>';
+            allProductsDiv.innerHTML = html;
+        }
+
+        // Load database on page load
+        loadDatabase();
+
+        // Enable enter key for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testSearch();
+            }
+        });
+    </script>
+</body>
+</html>

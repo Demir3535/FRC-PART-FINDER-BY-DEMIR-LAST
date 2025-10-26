@@ -1,0 +1,255 @@
+{
+  "_comment": "Bu dosya yeni ürün ekleme için şablon dosyasıdır",
+  "_instructions": [
+    "1. Bu şablonu kullanarak yeni ürün ekleyin",
+    "2. Tüm alanları doldurun",
+    "3. products-database.json dosyasına kopyalayın",
+    "4. JSON formatını kontrol edin",
+    "5. Test edin!"
+  ],
+
+  "example_product": {
+    "search_term": "ürün arama terimi (küçük harf)",
+    "products": [
+      {
+        "name": "Tam Ürün Adı",
+        "vendor": "Satıcı Adı",
+        "price": 99.99,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://satici.com/tam-urun-linki",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=Placeholder",
+        "category": "motors|motor-controllers|sensors|vision|drivetrain|power|pneumatics|hardware|accessories",
+        "tags": ["tag1", "tag2", "tag3"]
+      }
+    ]
+  },
+
+  "field_descriptions": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "example": "NEO Brushless Motor",
+      "description": "Ürünün tam adı"
+    },
+    "vendor": {
+      "type": "string",
+      "required": true,
+      "example": "REV Robotics",
+      "description": "Satıcı adı",
+      "available_vendors": [
+        "REV Robotics",
+        "AndyMark",
+        "WCP (West Coast Products)",
+        "CTRE",
+        "Limelight",
+        "Deküp Robotics"
+      ]
+    },
+    "price": {
+      "type": "number",
+      "required": true,
+      "example": 50.00,
+      "description": "USD cinsinden fiyat"
+    },
+    "originalPrice": {
+      "type": "number|null",
+      "required": false,
+      "example": 60.00,
+      "description": "İndirim varsa eski fiyat"
+    },
+    "discount": {
+      "type": "number",
+      "required": false,
+      "example": 15,
+      "description": "İndirim yüzdesi (0-100)"
+    },
+    "stock": {
+      "type": "string",
+      "required": true,
+      "example": "in-stock",
+      "available_values": [
+        "in-stock",
+        "limited-stock",
+        "out-of-stock",
+        "Sold-out"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "example": "https://www.revrobotics.com/rev-21-1650/",
+      "description": "Direkt ürün linki (http:// veya https:// ile başlamalı)"
+    },
+    "image": {
+      "type": "string",
+      "required": false,
+      "example": "https://via.placeholder.com/400x300",
+      "description": "Ürün görseli URL"
+    },
+    "category": {
+      "type": "string",
+      "required": false,
+      "example": "motors",
+      "available_categories": [
+        "motors",
+        "motor-controllers",
+        "control-system",
+        "power",
+        "vision",
+        "sensors",
+        "pneumatics",
+        "drivetrain",
+        "mechanisms",
+        "hardware",
+        "accessories"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "required": false,
+      "example": ["brushless", "neo", "drivetrain"],
+      "description": "Ürün etiketleri (arama için faydalı)"
+    }
+  },
+
+  "real_example": {
+    "comment": "Gerçek bir örnek - Neo Motor",
+    "neo motor": [
+      {
+        "name": "NEO Brushless Motor",
+        "vendor": "REV Robotics",
+        "price": 50.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.revrobotics.com/rev-21-1650/",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=REV+NEO",
+        "category": "motors",
+        "tags": ["brushless", "neo", "drivetrain"]
+      },
+      {
+        "name": "NEO Brushless Motor",
+        "vendor": "AndyMark",
+        "price": 56.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.andymark.com/products/rev-neo-brushless-motor",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+NEO",
+        "category": "motors",
+        "tags": ["brushless", "neo", "drivetrain"]
+      }
+    ]
+  },
+
+  "common_search_terms": {
+    "motors": [
+      "neo motor",
+      "neo 550",
+      "neo vortex",
+      "kraken",
+      "kraken x60",
+      "falcon",
+      "falcon 500",
+      "cim",
+      "cim motor"
+    ],
+    "controllers": [
+      "spark max",
+      "spark flex",
+      "talon srx",
+      "talon fx",
+      "victor spx"
+    ],
+    "sensors": [
+      "navx",
+      "pigeon",
+      "cancoder",
+      "color sensor",
+      "limit switch"
+    ],
+    "vision": [
+      "limelight",
+      "photonvision",
+      "orange pi",
+      "raspberry pi"
+    ],
+    "drivetrain": [
+      "swerve",
+      "mecanum",
+      "sds mk4",
+      "maxswerve"
+    ]
+  },
+
+  "step_by_step_guide": {
+    "step_1": {
+      "title": "Arama Terimini Belirle",
+      "description": "Kullanıcıların nasıl arayacağını düşünün",
+      "example": "neo motor, neo, rev neo"
+    },
+    "step_2": {
+      "title": "Ürün Bilgilerini Topla",
+      "checklist": [
+        "Tam ürün adı",
+        "Satıcı adı",
+        "Güncel fiyat",
+        "Direkt link",
+        "Stok durumu"
+      ]
+    },
+    "step_3": {
+      "title": "JSON Formatında Ekle",
+      "code": "{\n  \"arama terimi\": [{\n    \"name\": \"Ürün Adı\",\n    \"vendor\": \"Satıcı\",\n    \"price\": 99.99,\n    \"stock\": \"in-stock\",\n    \"url\": \"https://...\"\n  }]\n}"
+    },
+    "step_4": {
+      "title": "Format Kontrolü",
+      "command": "python3 -m json.tool products-database.json"
+    },
+    "step_5": {
+      "title": "Test Et",
+      "url": "http://localhost:8080/test-database.html"
+    }
+  },
+
+  "tips_and_tricks": {
+    "search_terms": [
+      "Küçük harf kullanın",
+      "Yaygın isimleri tercih edin",
+      "Birden fazla varyasyon ekleyin",
+      "Kısaltmaları da ekleyin (örn: 'neo' ve 'neo motor')"
+    ],
+    "prices": [
+      "USD cinsinden yazın",
+      "Güncel fiyatları kontrol edin",
+      "İndirim varsa originalPrice kullanın"
+    ],
+    "urls": [
+      "Direkt ürün linkini kullanın",
+      "http:// veya https:// ile başlasın",
+      "Kısa linkler yerine tam URL",
+      "Linki test edin"
+    ],
+    "categories": [
+      "Uygun kategoriyi seçin",
+      "Mevcut kategorileri kullanın",
+      "Gerekirse yeni kategori ekleyin"
+    ]
+  },
+
+  "quick_add_template": {
+    "YOUR_SEARCH_TERM": [
+      {
+        "name": "",
+        "vendor": "",
+        "price": 0.00,
+        "stock": "in-stock",
+        "url": "",
+        "category": "",
+        "tags": []
+      }
+    ]
+  }
+}

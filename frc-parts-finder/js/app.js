@@ -1,5 +1,33 @@
 // FRC Parça Bulucu - Ana JavaScript Dosyası
 
+// Global products database
+let PRODUCTS_DATABASE = null;
+let DATABASE_LOADED = false;
+
+// Load products database from JSON file
+async function loadProductsDatabase() {
+    if (DATABASE_LOADED) {
+        return PRODUCTS_DATABASE;
+    }
+
+    try {
+        const response = await fetch('./data/products-database.json');
+        if (!response.ok) {
+            throw new Error('Failed to load products database');
+        }
+        const data = await response.json();
+        PRODUCTS_DATABASE = data.products;
+        DATABASE_LOADED = true;
+        console.log('✅ Products database loaded successfully!', Object.keys(PRODUCTS_DATABASE).length, 'product types');
+        return PRODUCTS_DATABASE;
+    } catch (error) {
+        console.error('❌ Error loading products database:', error);
+        // Fallback to old REAL_PARTS if JSON fails
+        DATABASE_LOADED = false;
+        return null;
+    }
+}
+
 // Popüler FRC parça satıcıları
 const VENDORS = {
     revrobotics: {
@@ -112,7 +140,7 @@ async function searchParts(event) {
         document.getElementById('loadingSpinner').style.display = 'none';
 
         if (results.length === 0) {
-            const fallbackResults = generateMockResults(searchQuery);
+            const fallbackResults = await generateMockResults(searchQuery);
             if (fallbackResults.length > 0) {
                 const hasRealProducts = fallbackResults.some(part => !part.isSearchLink);
                 const fallbackSource = hasRealProducts ? 'database' : 'fallback';
@@ -139,7 +167,7 @@ async function searchParts(event) {
         document.getElementById('loadingSpinner').style.display = 'none';
 
         // Always try to show fallback results instead of error page
-        const fallbackResults = generateMockResults(searchQuery);
+        const fallbackResults = await generateMockResults(searchQuery);
         if (fallbackResults.length > 0) {
             const hasRealProducts = fallbackResults.some(part => !part.isSearchLink);
             const fallbackSource = hasRealProducts ? 'database' : 'fallback';
@@ -1223,25 +1251,31 @@ const REAL_PARTS = {
     ]
 };
 
-// Generate mock results - Smart search
-function generateMockResults(query) {
+// Generate mock results - Smart search with JSON database
+async function generateMockResults(query) {
     const queryLower = query.toLowerCase().trim();
     const normalizedQuery = normalizeQuery(queryLower);
 
+    // Load database if not loaded
+    const database = await loadProductsDatabase();
+
+    // Use loaded database or fallback to REAL_PARTS
+    const partsSource = database || REAL_PARTS;
+
     // Try exact match first
-    if (REAL_PARTS[queryLower]) {
-        return REAL_PARTS[queryLower];
+    if (partsSource[queryLower]) {
+        return partsSource[queryLower];
     }
 
     // Try normalized exact match (handles punctuation like "robo rio 2.0")
-    for (const [key, parts] of Object.entries(REAL_PARTS)) {
+    for (const [key, parts] of Object.entries(partsSource)) {
         if (normalizeQuery(key) === normalizedQuery) {
             return parts;
         }
     }
 
     // Try starts-with match - but only if key is substantial (>= 3 chars)
-    for (const [key, parts] of Object.entries(REAL_PARTS)) {
+    for (const [key, parts] of Object.entries(partsSource)) {
         if (key.length >= 3) {
             if (queryLower.startsWith(key) || key.startsWith(queryLower)) {
                 return parts;
@@ -1250,7 +1284,7 @@ function generateMockResults(query) {
     }
 
     // Try word-based matching - key must be in query as a complete word/token
-    for (const [key, parts] of Object.entries(REAL_PARTS)) {
+    for (const [key, parts] of Object.entries(partsSource)) {
         const queryWords = queryLower.split(/\s+/).filter(w => w.length > 0);
         const keyWords = key.split(/\s+/).filter(w => w.length > 0);
 
@@ -1281,7 +1315,7 @@ function generateMockResults(query) {
     }
 
     // More lenient substring search - but key must be substantial
-    for (const [key, parts] of Object.entries(REAL_PARTS)) {
+    for (const [key, parts] of Object.entries(partsSource)) {
         if (key.length >= 4 && queryLower.includes(key)) {
             return parts;
         }
@@ -1786,8 +1820,11 @@ function changeLanguage(lang) {
 }
 
 // Load saved theme and language on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('FRC Parts Finder ready!');
+
+    // Load products database immediately
+    await loadProductsDatabase();
 
     // Load theme
     const savedTheme = localStorage.getItem('theme') || 'light';
