@@ -147,10 +147,10 @@ async function searchParts(event) {
                 displayResults(fallbackResults, fallbackSource);
                 insertResultsNotice(hasRealProducts
                     ? `
-                        <strong>Local match:</strong> "${escapeHtml(searchQuery)}" için doğrulanmış ürünler veritabanından listelendi.
+                        <strong>Local match:</strong> Verified database results for "${escapeHtml(searchQuery)}".
                     `
                     : `
-                        <strong>Heads up:</strong> "${escapeHtml(searchQuery)}" canlı veritabanında yok. Akıllı satıcı arama linkleri gösteriliyor.
+                        <strong>Heads up:</strong> "${escapeHtml(searchQuery)}" is not in the live database. Showing smart vendor search links instead.
                     `
                 );
                 return;
@@ -180,14 +180,14 @@ async function searchParts(event) {
             let noticeMessage;
             if (hasRealProducts) {
                 noticeMessage = `
-                    <strong>✓ Yerel Eşleşme:</strong> "${escapeHtml(searchQuery)}" için doğrulanmış ürünler gösteriliyor.
-                    ${isTimeout ? '<br><small>Backend yanıt vermedi ama yerel veritabanından sonuç bulundu.</small>' : ''}
+                    <strong>Local match:</strong> Verified database results for "${escapeHtml(searchQuery)}".
+                    ${isTimeout ? '<br><small>Backend did not respond, so the local database results are shown.</small>' : ''}
                 `;
             } else {
                 noticeMessage = `
-                    <strong>ℹ️ Satıcı Arama:</strong> "${escapeHtml(searchQuery)}" için doğrudan satıcı arama linkleri gösteriliyor.
-                    ${isTimeout ? '<br><small>Backend timeout - otomatik olarak alternatif sonuçlar gösteriliyor.</small>' : ''}
-                    ${isNetworkError ? '<br><small>Backend bağlantısı yok - çevrimdışı mod aktif.</small>' : ''}
+                    <strong>Vendor search:</strong> Direct vendor search links for "${escapeHtml(searchQuery)}".
+                    ${isTimeout ? '<br><small>Backend timeout — automatically showing alternative results.</small>' : ''}
+                    ${isNetworkError ? '<br><small>No backend connection — offline mode active.</small>' : ''}
                 `;
             }
             insertResultsNotice(noticeMessage);
@@ -1381,19 +1381,28 @@ function displayResults(results, source = 'unknown') {
         return;
     }
 
-    // Add source information
-    const sourceInfo = getSourceInfo(source);
-    const sourceHeader = document.createElement('div');
-    sourceHeader.className = 'source-header';
-    sourceHeader.innerHTML = `
-        <div class="source-info">
-            <i class="fas fa-database"></i>
-            <span>${sourceInfo.name}</span>
-            <span class="source-badge">${sourceInfo.badge}</span>
-        </div>
-        <div class="results-count">${results.length} ${translations[currentLanguage]['results-found']}</div>
-    `;
-    container.appendChild(sourceHeader);
+    // Add source information except for local database (keeps cards centered)
+    if (source !== 'database') {
+        const sourceInfo = getSourceInfo(source);
+        const sourceHeader = document.createElement('div');
+        sourceHeader.className = 'source-header';
+        sourceHeader.innerHTML = `
+            <div class="source-info">
+                <i class="fas fa-database"></i>
+                <span>${sourceInfo.name}</span>
+                <span class="source-badge">${sourceInfo.badge}</span>
+            </div>
+            <div class="results-count">${results.length} ${translations[currentLanguage]['results-found']}</div>
+        `;
+        container.appendChild(sourceHeader);
+    } else {
+        const resultsCount = document.createElement('div');
+        resultsCount.className = 'results-count';
+        resultsCount.textContent = `${results.length} ${translations[currentLanguage]['results-found']}`;
+        resultsCount.style.margin = '0 auto 12px';
+        resultsCount.style.textAlign = 'center';
+        container.appendChild(resultsCount);
+    }
 
     // Find cheapest price among real prices
     const numericPrices = results

@@ -1,0 +1,391 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2025-01-26",
+  "description": "Enhanced product database with specs, CAD links, and additional vendors",
+  "products": {
+    "neo motor": [
+      {
+        "name": "NEO Brushless Motor",
+        "vendor": "REV Robotics",
+        "price": 50.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.revrobotics.com/rev-21-1650/",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=REV+NEO",
+        "category": "motors",
+        "tags": ["brushless", "neo", "drivetrain"],
+        "specs": {
+          "freeSpeed": "5676 RPM",
+          "stallTorque": "3.36 N⋅m",
+          "freeCurrent": "1.3 A",
+          "stallCurrent": "105 A",
+          "weight": "281 g",
+          "diameter": "63.5 mm",
+          "length": "71.2 mm",
+          "kvRating": "473 Kv"
+        },
+        "cadUrl": "https://www.revrobotics.com/content/docs/REV-21-1650-CAD.zip",
+        "cadFormats": ["STEP", "STL"],
+        "priceHistory": [
+          {"date": "2024-01-01", "price": 55.00},
+          {"date": "2024-06-01", "price": 52.00},
+          {"date": "2025-01-01", "price": 50.00}
+        ],
+        "reviews": [],
+        "averageRating": 4.8
+      },
+      {
+        "name": "NEO Brushless Motor",
+        "vendor": "AndyMark",
+        "price": 56.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.andymark.com/products/rev-neo-brushless-motor",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+NEO",
+        "category": "motors",
+        "tags": ["brushless", "neo", "drivetrain"],
+        "specs": {
+          "freeSpeed": "5676 RPM",
+          "stallTorque": "3.36 N⋅m",
+          "freeCurrent": "1.3 A",
+          "stallCurrent": "105 A",
+          "weight": "281 g"
+        },
+        "cadUrl": "https://www.revrobotics.com/content/docs/REV-21-1650-CAD.zip"
+      },
+      {
+        "name": "NEO Brushless Motor",
+        "vendor": "VEXpro",
+        "price": 54.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.vexrobotics.com/neo-motor.html",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=VEXpro+NEO",
+        "category": "motors",
+        "tags": ["brushless", "neo", "drivetrain"],
+        "specs": {
+          "freeSpeed": "5676 RPM",
+          "stallTorque": "3.36 N⋅m",
+          "freeCurrent": "1.3 A",
+          "stallCurrent": "105 A",
+          "weight": "281 g"
+        }
+      }
+    ],
+    "kraken x60": [
+      {
+        "name": "Kraken X60 Brushless Motor",
+        "vendor": "WCP (West Coast Products)",
+        "price": 217.99,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://wcproducts.com/products/ctre-kraken-x60-brushless-motor",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=WCP+Kraken+X60",
+        "category": "motors",
+        "tags": ["brushless", "kraken", "drivetrain", "high-power"],
+        "specs": {
+          "freeSpeed": "6000 RPM",
+          "stallTorque": "7.09 N⋅m",
+          "freeCurrent": "2.0 A",
+          "stallCurrent": "366 A",
+          "weight": "450 g",
+          "peakPower": "1316 W"
+        },
+        "cadUrl": "https://wcproducts.com/files/kraken-x60-cad.zip",
+        "cadFormats": ["STEP", "IGES"],
+        "averageRating": 4.9
+      },
+      {
+        "name": "Kraken X60 Brushless Motor",
+        "vendor": "CTRE",
+        "price": 217.99,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://store.ctr-electronics.com/kraken-x60-brushless-motor/",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+Kraken+X60",
+        "category": "motors",
+        "tags": ["brushless", "kraken", "drivetrain", "high-power"],
+        "specs": {
+          "freeSpeed": "6000 RPM",
+          "stallTorque": "7.09 N⋅m",
+          "freeCurrent": "2.0 A",
+          "stallCurrent": "366 A",
+          "weight": "450 g"
+        },
+        "cadUrl": "https://store.ctr-electronics.com/kraken-x60-cad/"
+      },
+      {
+        "name": "Kraken X60 Brushless Motor",
+        "vendor": "The Thrifty Bot",
+        "price": 215.00,
+        "originalPrice": 220.00,
+        "discount": 2,
+        "stock": "in-stock",
+        "url": "https://www.thethriftybot.com/products/kraken-x60-brushless-motor",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=TTB+Kraken",
+        "category": "motors",
+        "tags": ["brushless", "kraken", "drivetrain", "high-power"],
+        "specs": {
+          "freeSpeed": "6000 RPM",
+          "stallTorque": "7.09 N⋅m",
+          "freeCurrent": "2.0 A",
+          "stallCurrent": "366 A"
+        }
+      }
+    ],
+    "bearing": [
+      {
+        "name": "Ball Bearing 1/2\" ID",
+        "vendor": "AndyMark",
+        "price": 3.99,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.andymark.com/products/bearings",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=Bearing",
+        "category": "hardware",
+        "tags": ["bearing", "hardware"],
+        "specs": {
+          "innerDiameter": "0.5 inches",
+          "outerDiameter": "1.125 inches",
+          "width": "0.3125 inches",
+          "material": "Steel",
+          "loadRating": "500 lbs"
+        }
+      },
+      {
+        "name": "Ball Bearing Kit (Assorted)",
+        "vendor": "McMaster-Carr",
+        "price": 25.50,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.mcmaster.com/bearings/",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=McMaster+Bearings",
+        "category": "hardware",
+        "tags": ["bearing", "hardware", "kit"],
+        "specs": {
+          "quantity": "20 pieces",
+          "sizes": "Various (1/4\" to 3/4\" ID)"
+        }
+      }
+    ],
+    "sds mk4i": [
+      {
+        "name": "SDS MK4i Swerve Module",
+        "vendor": "WCP (West Coast Products)",
+        "price": 369.99,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://wcproducts.com/products/mk4i-swerve-module",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=SDS+MK4i",
+        "category": "drivetrain",
+        "tags": ["swerve", "sds", "mk4i", "holonomic"],
+        "specs": {
+          "gearRatios": ["L1: 8.14:1", "L2: 6.75:1", "L3: 6.12:1"],
+          "maxSpeed": "Up to 16.3 ft/s",
+          "weight": "2.2 lbs per module",
+          "wheelSize": "4 inches",
+          "motorType": "Falcon 500 / NEO compatible"
+        },
+        "cadUrl": "https://www.swervedrivespecialties.com/collections/kits/products/mk4i-swerve-module",
+        "cadFormats": ["STEP", "Solidworks"],
+        "averageRating": 4.9
+      },
+      {
+        "name": "SDS MK4i Swerve Module",
+        "vendor": "Studica",
+        "price": 375.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.studica.com/sds-mk4i-swerve-module",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=Studica+MK4i",
+        "category": "drivetrain",
+        "tags": ["swerve", "sds", "mk4i", "holonomic"],
+        "specs": {
+          "gearRatios": ["L1: 8.14:1", "L2: 6.75:1", "L3: 6.12:1"],
+          "maxSpeed": "Up to 16.3 ft/s",
+          "weight": "2.2 lbs per module"
+        }
+      }
+    ],
+    "spark max": [
+      {
+        "name": "SPARK MAX Motor Controller",
+        "vendor": "REV Robotics",
+        "price": 100.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.revrobotics.com/rev-11-2158/",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=REV+SPARK+MAX",
+        "category": "motor-controllers",
+        "tags": ["motor-controller", "spark", "can"],
+        "specs": {
+          "maxCurrent": "60 A peak",
+          "continuousCurrent": "40 A",
+          "voltage": "12V",
+          "weight": "75 g",
+          "canBus": true,
+          "pwmSupport": true,
+          "encoderPorts": "Data port for NEO encoder"
+        },
+        "cadUrl": "https://www.revrobotics.com/content/docs/REV-11-2158-CAD.zip",
+        "cadFormats": ["STEP"],
+        "averageRating": 4.7
+      },
+      {
+        "name": "SPARK MAX Motor Controller",
+        "vendor": "AndyMark",
+        "price": 105.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.andymark.com/products/spark-max-motor-controller",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=AndyMark+SPARK+MAX",
+        "category": "motor-controllers",
+        "tags": ["motor-controller", "spark", "can"],
+        "specs": {
+          "maxCurrent": "60 A peak",
+          "continuousCurrent": "40 A",
+          "voltage": "12V",
+          "weight": "75 g",
+          "canBus": true
+        }
+      }
+    ],
+    "limelight 3": [
+      {
+        "name": "Limelight 3 Vision Camera",
+        "vendor": "Limelight",
+        "price": 425.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://limelightvision.io/products/limelight-3",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=Limelight+3",
+        "category": "vision",
+        "tags": ["vision", "camera", "limelight"],
+        "specs": {
+          "resolution": "1280x800",
+          "frameRate": "Up to 100 FPS",
+          "processor": "NVIDIA Jetson",
+          "weight": "200 g",
+          "powerConsumption": "8W typical",
+          "poe": "PoE powered",
+          "neuralNetworks": "Supported"
+        },
+        "cadUrl": "https://limelightvision.io/pages/downloads",
+        "cadFormats": ["STEP", "STL"],
+        "averageRating": 4.9
+      },
+      {
+        "name": "Limelight 3 Vision Camera",
+        "vendor": "AndyMark",
+        "price": 430.00,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.andymark.com/products/limelight-3",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=Limelight+3",
+        "category": "vision",
+        "tags": ["vision", "camera", "limelight"],
+        "specs": {
+          "resolution": "1280x800",
+          "frameRate": "Up to 100 FPS",
+          "processor": "NVIDIA Jetson",
+          "weight": "200 g"
+        }
+      }
+    ],
+    "hex shaft": [
+      {
+        "name": "1/2\" Hex Shaft (12\" length)",
+        "vendor": "AndyMark",
+        "price": 9.99,
+        "originalPrice": null,
+        "discount": 0,
+        "stock": "in-stock",
+        "url": "https://www.andymark.com/products/1-2-in-hex-shaft",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=Hex+Shaft",
+        "category": "hardware",
+        "tags": ["shaft", "hex", "hardware"],
+        "specs": {
+          "diameter": "0.5 inches hex",
+          "length": "12 inches",
+          "material": "Steel",
+          "finish": "Zinc plated"
+        }
+      },
+      {
+        "name": "1/2\" Hex Shaft Kit",
+        "vendor": "WZ2U",
+        "price": 15.00,
+        "originalPrice": 18.00,
+        "discount": 17,
+        "stock": "in-stock",
+        "url": "https://www.wz2u.com/hex-shaft-kit",
+        "image": "https://via.placeholder.com/400x300/2563eb/ffffff?text=WZ2U+Hex+Kit",
+        "category": "hardware",
+        "tags": ["shaft", "hex", "hardware", "kit"],
+        "specs": {
+          "diameter": "0.5 inches hex",
+          "pieces": "4 x 12\" shafts",
+          "material": "Steel"
+        }
+      }
+    ]
+  },
+  "robotExamples": {
+    "neo motor": [
+      {
+        "teamNumber": 1678,
+        "teamName": "Citrus Circuits",
+        "year": 2024,
+        "usage": "Drivetrain - 6x NEO motors with custom gearboxes",
+        "notes": "Excellent reliability, ran entire season without issues"
+      },
+      {
+        "teamNumber": 254,
+        "teamName": "The Cheesy Poofs",
+        "year": 2023,
+        "usage": "Drivetrain - 4x NEO motors with SDS MK4i modules",
+        "notes": "Smooth operation, great for swerve drive"
+      }
+    ],
+    "kraken x60": [
+      {
+        "teamNumber": 1323,
+        "teamName": "MadTown Robotics",
+        "year": 2024,
+        "usage": "Swerve drivetrain - 4x Kraken motors",
+        "notes": "Incredible power, reached 18 fps top speed"
+      }
+    ]
+  },
+  "communityReviews": {
+    "neo-motor-rev": [
+      {
+        "teamNumber": 5190,
+        "rating": 5,
+        "review": "Best motor for FRC. Reliable, powerful, and easy to program with SPARK MAX.",
+        "date": "2024-12-15",
+        "helpful": 42
+      },
+      {
+        "teamNumber": 2910,
+        "rating": 4,
+        "review": "Great motor but a bit pricey. Worth it for the integrated encoder.",
+        "date": "2024-11-20",
+        "helpful": 28
+      }
+    ]
+  }
+}

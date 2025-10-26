@@ -1,0 +1,87 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2025-01-26",
+  "newVendors": {
+    "vexpro": {
+      "name": "VEXpro",
+      "searchUrl": "https://www.vexrobotics.com/pro/search?q=",
+      "domain": "vexrobotics.com",
+      "logo": "https://www.vexrobotics.com/media/logo/stores/3/VEX_PRO_Logo.png"
+    },
+    "studica": {
+      "name": "Studica",
+      "searchUrl": "https://www.studica.com/us/en/search?q=",
+      "domain": "studica.com",
+      "logo": "https://www.studica.com/themes/studica/images/logo.png"
+    },
+    "thethriftybot": {
+      "name": "The Thrifty Bot",
+      "searchUrl": "https://www.thethriftybot.com/search?q=",
+      "domain": "thethriftybot.com",
+      "logo": "https://cdn.shopify.com/s/files/1/0558/2665/files/TTB_Logo.png"
+    },
+    "mcmaster": {
+      "name": "McMaster-Carr",
+      "searchUrl": "https://www.mcmaster.com/#",
+      "domain": "mcmaster.com",
+      "logo": "https://www.mcmaster.com/images/mcmaster-logo.svg"
+    },
+    "wz2u": {
+      "name": "WZ2U",
+      "searchUrl": "https://www.wz2u.com/store-search?q=",
+      "domain": "wz2u.com",
+      "logo": "https://cdn.shopify.com/s/files/1/0569/9427/files/WZ2U_Logo.png"
+    },
+    "gobilda": {
+      "name": "goBILDA",
+      "searchUrl": "https://www.gobilda.com/search/?q=",
+      "domain": "gobilda.com",
+      "logo": "https://www.gobilda.com/media/logo/stores/1/goBILDA_Logo.png"
+    }
+  },
+  "productSpecs": {
+    "motor": {
+      "freeSpeed": "RPM",
+      "stallTorque": "N⋅m",
+      "freeCurrent": "A",
+      "stallCurrent": "A",
+      "weight": "g",
+      "diameter": "mm",
+      "length": "mm"
+    },
+    "motorController": {
+      "maxCurrent": "A",
+      "continuousCurrent": "A",
+      "peakCurrent": "A",
+      "weight": "g",
+      "canBus": "boolean"
+    },
+    "sensor": {
+      "resolution": "counts/rev or degrees",
+      "updateRate": "Hz",
+      "weight": "g"
+    },
+    "wheel": {
+      "diameter": "inches",
+      "width": "inches",
+      "weight": "g",
+      "durometer": "A"
+    }
+  },
+  "priceHistory": {
+    "trackingEnabled": true,
+    "checkInterval": "daily",
+    "retentionPeriod": "365 days"
+  },
+  "cadIntegration": {
+    "supportedFormats": ["STEP", "STL", "IGES", "OBJ"],
+    "onshapeEnabled": true,
+    "solidworksEnabled": true
+  },
+  "communityFeatures": {
+    "ratingsEnabled": true,
+    "reviewsEnabled": true,
+    "robotExamplesEnabled": true,
+    "chiefDelphiIntegration": true
+  }
+}
