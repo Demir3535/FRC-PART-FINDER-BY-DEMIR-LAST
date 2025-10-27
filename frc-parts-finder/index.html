@@ -166,10 +166,6 @@
                 </div>
             </div>
 
-            <div class="home-footer-note">
-                <i class="fas fa-lightbulb"></i>
-                <span>Tip: Add parts to comparison or your BOM while you browse — everything stays synced during your session.</span>
-            </div>
         </section>
 
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">
@@ -186,6 +182,62 @@
             <div id="forumResults">
                 <!-- Forum links will be added here -->
             </div>
+        </div>
+    </div>
+
+    <div class="bug-report-container" id="bugReportContainer">
+        <button id="bugReportToggle"
+                class="bug-report-btn"
+                type="button"
+                aria-haspopup="dialog"
+                aria-expanded="false">
+            <i class="fas fa-bug"></i> Report a bug
+        </button>
+        <div id="bugReportPanel"
+             class="bug-report-panel"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="bugReportTitle"
+             aria-hidden="true">
+            <form name="bug-report"
+                  method="POST"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="bug-report">
+                <p class="hidden-field">
+                    <label>Don’t fill this out if you’re human:
+                        <input name="bot-field" type="text" autocomplete="off">
+                    </label>
+                </p>
+                <div class="bug-report-header">
+                    <h3 id="bugReportTitle"><i class="fas fa-bug"></i> Found an issue?</h3>
+                    <button type="button" class="bug-report-close" id="bugReportClose" aria-label="Close bug report form">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="bug-report-body">
+                    <label>
+                        Page / feature
+                        <input type="text" name="area" placeholder="e.g. Kraken search results" required>
+                    </label>
+                    <label>
+                        What went wrong?
+                        <textarea name="description" rows="4" placeholder="Describe the bug, steps to reproduce, expected vs actual" required></textarea>
+                    </label>
+                    <label>
+                        Contact email (optional)
+                        <input type="email" name="email" placeholder="you@example.com">
+                    </label>
+                    <label class="screenshot-field">
+                        Screenshot / link (optional)
+                        <input type="url" name="reference" placeholder="https://...">
+                    </label>
+                </div>
+                <div class="bug-report-actions">
+                    <button type="submit" class="btn-primary">Send report</button>
+                    <button type="button" class="btn-secondary" id="bugReportCancel">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 

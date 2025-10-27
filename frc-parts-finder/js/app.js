@@ -188,6 +188,66 @@ function handleSearchInputChange(event) {
 
 document.getElementById('searchInput').addEventListener('input', handleSearchInputChange);
 
+function setupBugReportUI() {
+    const toggle = document.getElementById('bugReportToggle');
+    const panel = document.getElementById('bugReportPanel');
+    const closeBtn = document.getElementById('bugReportClose');
+    const cancelBtn = document.getElementById('bugReportCancel');
+
+    if (!toggle || !panel) return;
+
+    const openPanel = () => {
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
+
+        const firstField = panel.querySelector('input[name=\"area\"]');
+        if (firstField) {
+            setTimeout(() => firstField.focus(), 50);
+        }
+    };
+
+    const closePanel = () => {
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+    };
+
+    toggle.addEventListener('click', () => {
+        if (panel.classList.contains('is-open')) {
+            closePanel();
+        } else {
+            openPanel();
+        }
+    });
+
+    [closeBtn, cancelBtn].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', closePanel);
+        }
+    });
+
+    panel.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closePanel();
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!panel.classList.contains('is-open')) return;
+
+        const isClickInsidePanel = panel.contains(event.target);
+        const isToggle = event.target === toggle || toggle.contains(event.target);
+
+        if (!isClickInsidePanel && !isToggle) {
+            closePanel();
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', setupBugReportUI);
+
 // Main search function - Enhanced with Shopify/WooCommerce integration!
 async function searchParts(event) {
     // Prevent any form submission or page reload
@@ -377,7 +437,7 @@ const REAL_PARTS = {
             originalPrice: null,
             discount: 0,
             stock: 'in-stock',
-            url: 'https://wcproducts.com/search?q=Kraken+X60',
+            url: 'https://www.wcproducts.com/products/kraken-x60-brushless-motor',
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=WCP+Kraken+X60'
         },
         {
@@ -387,7 +447,7 @@ const REAL_PARTS = {
             originalPrice: null,
             discount: 0,
             stock: 'in-stock',
-            url: 'https://store.ctr-electronics.com/search?q=Kraken+X60',
+            url: 'https://store.ctr-electronics.com/kraken-x60-brushless-motor/',
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+Kraken+X60'
         }
     ],
@@ -854,7 +914,7 @@ const REAL_PARTS = {
             originalPrice: null,
             discount: 0,
             stock: 'in-stock',
-            url: 'https://wcproducts.com/products/kraken-x60',
+            url: 'https://www.wcproducts.com/products/kraken-x60-brushless-motor',
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=WCP+Kraken+X60'
         },
         {
@@ -864,7 +924,7 @@ const REAL_PARTS = {
             originalPrice: null,
             discount: 0,
             stock: 'in-stock',
-            url: 'https://store.ctr-electronics.com/kraken-x60/',
+            url: 'https://store.ctr-electronics.com/kraken-x60-brushless-motor/',
             image: 'https://via.placeholder.com/400x300/2563eb/ffffff?text=CTRE+Kraken+X60'
         }
     ],
