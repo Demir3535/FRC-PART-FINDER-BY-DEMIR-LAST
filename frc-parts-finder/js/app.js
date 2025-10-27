@@ -126,6 +126,40 @@ function normalizeQuery(text) {
     return text.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
+function setHomeVisibility(shouldShow) {
+    const homeContent = document.getElementById('homeContent');
+    if (!homeContent) return;
+
+    if (shouldShow) {
+        homeContent.classList.remove('is-hidden');
+    } else {
+        homeContent.classList.add('is-hidden');
+    }
+}
+
+function initializeHomeContent() {
+    const homeContent = document.getElementById('homeContent');
+    if (!homeContent) return;
+
+    setHomeVisibility(true);
+
+    const searchInput = document.getElementById('searchInput');
+    const quickSearchButtons = homeContent.querySelectorAll('[data-search-term]');
+
+    quickSearchButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const term = button.getAttribute('data-search-term') || '';
+            if (searchInput) {
+                searchInput.value = term;
+                searchInput.focus();
+            }
+            searchParts();
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initializeHomeContent);
+
 // Enter tuşu ile arama yapabilme
 document.getElementById('searchInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
@@ -148,6 +182,8 @@ async function searchParts(event) {
         alert('Please enter a part name!');
         return false;
     }
+
+    setHomeVisibility(false);
 
     // Prevent multiple simultaneous searches
     if (window.isSearching) {
@@ -1311,6 +1347,24 @@ async function generateMockResults(query) {
     const queryLower = query.toLowerCase().trim();
     const normalizedQuery = normalizeQuery(queryLower);
 
+    if (normalizedQuery === 'edadoraaksular') {
+        return [
+            {
+                name: 'Eda Dora Aksular - Ultimate Robotics Mentor',
+                vendor: 'Legendary',
+                price: '150 cm',
+                originalPrice: null,
+                discount: 0,
+                stock: 'in-stock',
+                url: 'https://www.chiefdelphi.com/search?q=Eda%20Dora%20Aksular',
+                image: 'https://via.placeholder.com/400x300/0f172a/ffffff?text=Legendary',
+                category: 'mentors',
+                tags: ['mentor', 'legendary', 'inspiration'],
+                isEasterEgg: true
+            }
+        ];
+    }
+
     // Load database if not loaded
     const database = await loadProductsDatabase();
 
@@ -1428,6 +1482,8 @@ async function generateMockResults(query) {
 
 // Display results on screen with enhanced information
 function displayResults(results, source = 'unknown') {
+    setHomeVisibility(false);
+
     const container = document.getElementById('resultsContainer');
     container.innerHTML = '';
 
@@ -2158,24 +2214,83 @@ function generateRandomDate() {
     return `${month} ${year}`;
 }
 
+function applyTheme(mode) {
+    const body = document.body;
+    const themeIcon = document.querySelector('#themeToggle i');
+    const isDark = mode === 'dark';
+
+    body.classList.toggle('dark-mode', isDark);
+    body.classList.toggle('light-mode', !isDark);
+
+    if (themeIcon) {
+        themeIcon.classList.toggle('fa-sun', isDark);
+        themeIcon.classList.toggle('fa-moon', !isDark);
+    }
+
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+
 // Theme toggle function
 function toggleTheme() {
     const body = document.body;
-    const themeIcon = document.querySelector('#themeToggle i');
-
-    body.classList.toggle('dark-mode');
-    body.classList.toggle('light-mode');
-
-    if (body.classList.contains('dark-mode')) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light');
-    }
+    const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
 }
+
+function activateDeliMode() {
+    if (window.deliModeActive) {
+        return;
+    }
+
+    window.deliModeActive = true;
+    const initialTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    let currentTheme = initialTheme;
+    const deliButton = document.getElementById('deliModeToggle');
+
+    if (deliButton) {
+        deliButton.classList.add('is-active');
+        deliButton.setAttribute('aria-pressed', 'true');
+    }
+
+    if (typeof showNotification === 'function') {
+        showNotification('🌀 Deli mode starting!', 'warning');
+    } else {
+        console.log('🌀 Deli mode starting!');
+    }
+
+    const intervalId = setInterval(() => {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(currentTheme);
+    }, 260);
+
+    window.deliModeTimeout = setTimeout(() => {
+        clearInterval(intervalId);
+        applyTheme(initialTheme);
+
+        if (deliButton) {
+            deliButton.classList.remove('is-active');
+            deliButton.setAttribute('aria-pressed', 'false');
+        }
+
+        if (typeof showNotification === 'function') {
+            showNotification('😅 Deli mode ended!', 'success');
+        } else {
+            console.log('😅 Deli mode ended!');
+        }
+
+        window.deliModeActive = false;
+        window.deliModeTimeout = null;
+    }, 4000);
+}
+
+function setupDeliMode() {
+    const deliButton = document.getElementById('deliModeToggle');
+    if (!deliButton) return;
+
+    deliButton.addEventListener('click', activateDeliMode);
+}
+document.addEventListener('DOMContentLoaded', setupDeliMode);
 
 // Translation system
 const translations = {
@@ -2264,15 +2379,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Load theme
     const savedTheme = localStorage.getItem('theme') || 'light';
-    const body = document.body;
-    const themeIcon = document.querySelector('#themeToggle i');
-
-    if (savedTheme === 'dark') {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    }
+    applyTheme(savedTheme);
 
     // Set language to English only
     changeLanguage('en');

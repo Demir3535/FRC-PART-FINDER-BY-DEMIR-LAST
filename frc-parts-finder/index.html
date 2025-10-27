@@ -102,6 +102,76 @@
             </div>
         </div>
 
+        <section id="homeContent" class="home-content">
+            <div class="home-hero">
+                <div class="home-hero-text">
+                    <h2>Start planning this season&apos;s robot</h2>
+                    <p>Browse verified FRC components, compare vendors instantly, and send parts straight into your BOM without leaving the page.</p>
+                    <div class="home-quick-search">
+                        <span class="quick-search-label">Popular searches:</span>
+                        <div class="quick-search-tags">
+                            <button class="quick-search-tag" data-search-term="REV NEO">REV NEO</button>
+                            <button class="quick-search-tag" data-search-term="Kraken X60">Kraken X60</button>
+                            <button class="quick-search-tag" data-search-term="SPARK MAX">SPARK MAX</button>
+                            <button class="quick-search-tag" data-search-term="Limelight 3">Limelight 3</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-hero-actions">
+                    <div class="hero-feature-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Compare Vendors</h3>
+                        <p>Line up motors, controllers, and sensors to spot the best deal instantly.</p>
+                    </div>
+                    <div class="hero-feature-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Build Your BOM</h3>
+                        <p>Save every part, track quantities, and export a clean order list for the team.</p>
+                    </div>
+                    <div class="hero-feature-card">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Run Key Calcs</h3>
+                        <p>Use drivetrain and mechanism calculators without leaving the finder.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-grid">
+                <div class="home-card">
+                    <h3><i class="fas fa-plug"></i> Motors &amp; Actuation</h3>
+                    <p>Check brushless powerhouses, gearboxes, and linear motion solutions tested in-season.</p>
+                    <ul>
+                        <li>REV NEO &amp; NEO V1.1</li>
+                        <li>CTRE Kraken X60</li>
+                        <li>Falcon 500 alternatives</li>
+                    </ul>
+                </div>
+                <div class="home-card">
+                    <h3><i class="fas fa-bolt"></i> Control System</h3>
+                    <p>Grab motor controllers, CAN accessories, and sensor upgrades ready for rapid wiring.</p>
+                    <ul>
+                        <li>SPARK MAX &amp; MAX Data</li>
+                        <li>Talon FX / SRX family</li>
+                        <li>CANCoder / Pigeon IMU</li>
+                    </ul>
+                </div>
+                <div class="home-card">
+                    <h3><i class="fas fa-cogs"></i> Mechanisms &amp; Kits</h3>
+                    <p>Discover pre-built drivetrains, climbers, and intake kits that shorten build time.</p>
+                    <ul>
+                        <li>Swerve modules &amp; wheels</li>
+                        <li>Intake rollers &amp; belts</li>
+                        <li>Pneumatic essentials</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="home-footer-note">
+                <i class="fas fa-lightbulb"></i>
+                <span>Tip: Add parts to comparison or your BOM while you browse — everything stays synced during your session.</span>
+            </div>
+        </section>
+
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">
             <div class="spinner"></div>
             <p>Searching for parts...</p>
@@ -120,6 +190,9 @@
     </div>
 
     <footer class="footer">
+        <button id="deliModeToggle" class="footer-easter-egg" type="button" aria-label="Deli modu" aria-pressed="false" title="Deli modu">
+            <i class="fas fa-face-grin-squint"></i>
+        </button>
         <p>&copy; 2025 Demir Avci. All rights reserved.🇹🇷</p>
     </footer>
 
