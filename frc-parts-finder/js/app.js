@@ -132,8 +132,10 @@ function setHomeVisibility(shouldShow) {
 
     if (shouldShow) {
         homeContent.classList.remove('is-hidden');
+        homeContent.style.display = '';
     } else {
         homeContent.classList.add('is-hidden');
+        homeContent.style.display = 'none';
     }
 }
 
@@ -168,6 +170,24 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
     }
 });
 
+function handleSearchInputChange(event) {
+    const value = event.target.value.trim();
+    if (value.length === 0 && !window.isSearching) {
+        setHomeVisibility(true);
+        const container = document.getElementById('resultsContainer');
+        if (container) {
+            container.innerHTML = '';
+        }
+        const forumSection = document.getElementById('forumSection');
+        if (forumSection) {
+            forumSection.style.display = 'none';
+        }
+        return;
+    }
+}
+
+document.getElementById('searchInput').addEventListener('input', handleSearchInputChange);
+
 // Main search function - Enhanced with Shopify/WooCommerce integration!
 async function searchParts(event) {
     // Prevent any form submission or page reload
@@ -182,8 +202,6 @@ async function searchParts(event) {
         alert('Please enter a part name!');
         return false;
     }
-
-    setHomeVisibility(false);
 
     // Prevent multiple simultaneous searches
     if (window.isSearching) {
